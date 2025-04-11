@@ -179,6 +179,18 @@ li input[type="checkbox"] {
     window.onload = () => {
         loadTodos();
     };
+    document.getElementById("pasteButton").addEventListener("click", () => {
+    navigator.clipboard.readText().then((text) => {
+      if (text.trim()) {
+        createTodoItem(text);  // TODOとして追加！
+        saveTodos();
+      } else {
+        alert("クリップボードにテキストがありません");
+      }
+    }).catch((err) => {
+      alert("ペーストに失敗しました：" + err);
+    });
+  });
 
 
   </script>
