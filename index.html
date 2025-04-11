@@ -113,7 +113,7 @@ li input[type="checkbox"] {
   <input type="text" id="todoInput" placeholder="やることを入力" />
   <button onclick="addTodo()">追加</button>
   <button id="pasteButton">ペースト</button>
-
+  <button id="clearAllButton">全削除</button>
   <ul id="todoList">
     <!-- TODOがここに追加される -->
   </ul>
@@ -191,6 +191,13 @@ li input[type="checkbox"] {
       alert("ペーストに失敗しました：" + err);
     });
   });
+
+  document.getElementById("clearAllButton").addEventListener("click", () => {
+  if (confirm("本当にすべて削除しますか？")) {
+    document.getElementById("todoList").innerHTML = ""; // リストを空に
+    localStorage.removeItem("todos"); // localStorageからも削除
+  }
+});
 
 
   </script>
