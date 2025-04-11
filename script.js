@@ -74,12 +74,14 @@ navigator.clipboard.readText().then((text) => {
 });
 });
 
+/*
 document.getElementById("clearAllButton").addEventListener("click", () => {
 if (confirm("本当にすべて削除しますか？")) {
 document.getElementById("todoList").innerHTML = ""; // リストを空に
 localStorage.removeItem("todos"); // localStorageからも削除
 }
 });
+*/
 
 document.getElementById("downloadCSV").addEventListener("click", () => {
 // 1. localStorageからTODOを取得
