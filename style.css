@@ -86,7 +86,7 @@ li.animate {
     animation: fadeInUp 0.4s ease-out;
 }
 
-/*
+
 li.checked span {
     text-decoration: line-through;
     color: #aaa;
@@ -97,7 +97,7 @@ li input[type="checkbox"] {
     margin-right: 10px;
     transform: scale(1.2);
 }
-*/
+
 /* 📱 画面が狭いときの対応 */
 @media (max-width: 480px) {
 button {
