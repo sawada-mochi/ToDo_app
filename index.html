@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TODOアプリ</title>
+  <style>
+body {
+  font-family: "Hiragino Maru Gothic ProN", "Arial", sans-serif;
+  background: #fff4f4;
+  padding: 40px;
+  text-align: center;
+}
+
+h1 {
+  color: #ff69b4;
+  font-size: 2.2em;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px #ffa5d8;
+}
+
+input[type="text"] {
+  padding: 12px;
+  width: 240px;
+  font-size: 16px;
+  border: 2px solid #ffb6c1;
+  border-radius: 8px;
+  outline: none;
+  background-color: #fff0f5;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff69b4;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff85c1;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+li {
+  background: #ffe4e1;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(255, 105, 180, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+}
+
+li button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+li button:hover {
+  background: #ff8888;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+li.animate {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+li.checked span {
+  text-decoration: line-through;
+  color: #aaa;
+  opacity: 0.6;
+}
+
+li input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+
+
+  </style>
+</head>
+<body>
+  <h1>私のTODOリスト</h1>
+
+  <input type="text" id="todoInput" placeholder="やることを入力" />
+  <button onclick="addTodo()">追加</button>
+
+  <ul id="todoList">
+    <!-- TODOがここに追加される -->
+  </ul>
+
+  <script>
+    function addTodo() {
+        const input = document.getElementById("todoInput");
+        const text = input.value;
+        if (text === "") return;
+
+        createTodoItem(text); // ← 新しいアイテムを作成
+        saveTodos();          // ← 保存！
+
+        input.value = "";
+    }
+    function saveTodos() {
+        const todos = [];
+        document.querySelectorAll("#todoList li").forEach((li) => {
+            const checkbox = li.querySelector("input[type='checkbox']");
+            const text = li.querySelector("span").textContent;
+            todos.push({ text, done: checkbox.checked });
+        });
+        localStorage.setItem("todos", JSON.stringify(todos));
+    }
+
+    function loadTodos() {
+        const todos = JSON.parse(localStorage.getItem("todos") || "[]");
+        todos.forEach((todo) => {
+            createTodoItem(todo.text, todo.done);
+        });
+    }
+
+    function createTodoItem(text, done = false) {
+        const li = document.createElement("li");
+        li.classList.add("animate");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = done;
+        checkbox.onchange = () => {
+            li.classList.toggle("checked", checkbox.checked);
+            saveTodos(); // ✅ 状態が変わったら保存
+        };
+
+        const span = document.createElement("span");
+        span.textContent = text;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "削除";
+        deleteBtn.onclick = () => {
+            li.remove();
+            saveTodos(); // ✅ 削除したら保存
+        };
+
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+
+        if (done) li.classList.add("checked");
+
+        document.getElementById("todoList").appendChild(li);
+    }
+    window.onload = () => {
+        loadTodos();
+    };
+
+
+  </script>
+</body>
+</html>
