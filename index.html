@@ -102,6 +102,24 @@
       margin-right: 10px;
       transform: scale(1.2);
     }
+  /* 📱 画面が狭いときの対応 */
+  @media (max-width: 480px) {
+    button {
+      font-size: 12px;
+      padding: 8px 12px;
+    }
+  
+    input[type="text"] {
+      font-size: 14px;
+    }
+  
+    #downloadCSV {
+      bottom: 10px;
+      right: 10px;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+  }
     
     #downloadCSV {
       position: fixed;
