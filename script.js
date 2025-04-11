@@ -12,9 +12,9 @@ function addTodo() {
 function saveTodos() {
     const todos = [];
     document.querySelectorAll("#todoList li").forEach((li) => {
-        //const checkbox = li.querySelector("input[type='checkbox']");
+        const checkbox = li.querySelector("input[type='checkbox']");
         const text = li.querySelector("span").textContent;
-        //todos.push({ text, done: checkbox.checked });
+        todos.push({ text, done: checkbox.checked });
     });
     localStorage.setItem("todos", JSON.stringify(todos));
 }
@@ -30,29 +30,29 @@ function createTodoItem(text, done = false) {
     const li = document.createElement("li");
     li.classList.add("animate");
 
-    //const checkbox = document.createElement("input");
-    //checkbox.type = "checkbox";
-    //checkbox.checked = done;
-    //checkbox.onchange = () => {
-    //    li.classList.toggle("checked", checkbox.checked);
-    //    saveTodos(); // ✅ 状態が変わったら保存
-    //};
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = done;
+    checkbox.onchange = () => {
+        li.classList.toggle("checked", checkbox.checked);
+        saveTodos(); // ✅ 状態が変わったら保存
+    };
 
     const span = document.createElement("span");
     span.textContent = text;
 
-    //const deleteBtn = document.createElement("button");
-    //deleteBtn.textContent = "削除";
-    //deleteBtn.onclick = () => {
-    //    li.remove();
-    //    saveTodos(); // ✅ 削除したら保存
-    //};
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "削除";
+    deleteBtn.onclick = () => {
+        li.remove();
+        saveTodos(); // ✅ 削除したら保存
+    };
 
-    //li.appendChild(checkbox);
+    li.appendChild(checkbox);
     li.appendChild(span);
-    //li.appendChild(deleteBtn);
+    li.appendChild(deleteBtn);
 
-    //if (done) li.classList.add("checked");
+    if (done) li.classList.add("checked");
 
     document.getElementById("todoList").appendChild(li);
 }
@@ -74,14 +74,14 @@ navigator.clipboard.readText().then((text) => {
 });
 });
 
-/*
+
 document.getElementById("clearAllButton").addEventListener("click", () => {
 if (confirm("本当にすべて削除しますか？")) {
 document.getElementById("todoList").innerHTML = ""; // リストを空に
 localStorage.removeItem("todos"); // localStorageからも削除
 }
 });
-*/
+
 
 document.getElementById("downloadCSV").addEventListener("click", () => {
 // 1. localStorageからTODOを取得
