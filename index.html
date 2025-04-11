@@ -223,6 +223,12 @@
   // 1. localStorageからTODOを取得
   const todos = JSON.parse(localStorage.getItem("todos") || "[]");
 
+  // 🔒 リストが空なら中止＆アラート
+  if (todos.length === 0) {
+    alert("TODOリストが空です。CSVをダウンロードできません。");
+    return;
+  }
+  
   // 2. CSV形式の文字列を作成
   let csv = "タスク,完了\n";
   todos.forEach(todo => {
