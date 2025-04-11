@@ -12,9 +12,9 @@ function addTodo() {
 function saveTodos() {
     const todos = [];
     document.querySelectorAll("#todoList li").forEach((li) => {
-        const checkbox = li.querySelector("input[type='checkbox']");
+        //const checkbox = li.querySelector("input[type='checkbox']");
         const text = li.querySelector("span").textContent;
-        todos.push({ text, done: checkbox.checked });
+        //todos.push({ text, done: checkbox.checked });
     });
     localStorage.setItem("todos", JSON.stringify(todos));
 }
