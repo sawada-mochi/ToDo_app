@@ -109,7 +109,7 @@ li input[type="checkbox"] {
 </head>
 <body>
   <h1>私のTODOリスト</h1>
-
+  <button id="downloadCSV">CSVダウンロード</button>
   <input type="text" id="todoInput" placeholder="やることを入力" />
   <button onclick="addTodo()">追加</button>
   <button id="pasteButton">ペースト</button>
@@ -197,8 +197,32 @@ li input[type="checkbox"] {
     document.getElementById("todoList").innerHTML = ""; // リストを空に
     localStorage.removeItem("todos"); // localStorageからも削除
   }
-});
+  });
 
+  document.getElementById("downloadCSV").addEventListener("click", () => {
+  // 1. localStorageからTODOを取得
+  const todos = JSON.parse(localStorage.getItem("todos") || "[]");
+
+  // 2. CSV形式の文字列を作成
+  let csv = "タスク,完了\n";
+  todos.forEach(todo => {
+    const escapedTask = `"${todo.text.replace(/"/g, '""')}"`; // ダブルクオート対策
+    csv += `${escapedTask},${todo.done}\n`;
+  });
+
+  // 3. BlobでCSVファイルを作る
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+
+  // 4. ダウンロードリンクを作って自動クリック
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "todo.csv";
+  a.click();
+
+  // 5. 後始末
+  URL.revokeObjectURL(url);
+});
 
   </script>
 </body>
