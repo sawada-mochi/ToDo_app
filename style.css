@@ -104,6 +104,26 @@ li span {
   white-space: pre-wrap; /* ← 改行もきれいに扱える */
 }
 
+.accordion-header {
+  background: #f4a261;
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 8px 8px 0 0;
+}
+
+.accordion-content {
+  overflow: hidden;
+  max-height: 1000px;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-content.collapsed {
+  max-height: 0;
+  padding: 0;
+}
+
 /* 📱 画面が狭いときの対応 */
 @media (max-width: 480px) {
 button {
