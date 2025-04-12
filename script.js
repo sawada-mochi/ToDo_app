@@ -61,6 +61,15 @@ window.onload = () => {
     loadTodos();
 };
 
+const header = document.querySelector(".accordion-header");
+const content = document.querySelector(".accordion-content");
+
+header.addEventListener("click", () => {
+  content.classList.toggle("collapsed");
+  const isOpen = !content.classList.contains("collapsed");
+  header.textContent = isOpen ? "📝 TODOリスト ▼" : "📝 TODOリスト ▶";
+});
+
 document.getElementById("pasteButton").addEventListener("click", () => {
 navigator.clipboard.readText().then((text) => {
   if (text.trim()) {
