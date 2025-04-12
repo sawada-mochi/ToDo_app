@@ -13,9 +13,13 @@
   <button onclick="addTodo()">追加</button>
   <button id="pasteButton">ペースト</button>
   <button id="clearAllButton">全削除</button>
-  <ul id="todoList">
-    <!-- TODOがここに追加される -->
-  </ul>
+  <div class="accordion">
+    <div class="accordion-header">📝 TODOリスト ▼</div>
+    <ul id="todoList" class="accordion-content">
+      <!-- TODOがここに入る -->
+    </ul>
+  </div>
+
 
   <script src="script.js"></script> <!-- ← JSは最後に読み込む！ -->
 </body>
