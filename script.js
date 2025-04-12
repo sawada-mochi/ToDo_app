@@ -39,7 +39,7 @@ function createTodoItem(text, done = false) {
     };
 
     const span = document.createElement("span");
-    span.textContent = text.replace(/\n/g, "<br>");
+    span.innerHTML = text.replace(/\n/g, "<br>");
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "削除";
