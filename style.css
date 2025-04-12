@@ -98,6 +98,12 @@ li input[type="checkbox"] {
     transform: scale(1.2);
 }
 
+li span {
+  text-align: left;
+  display: block;  /* ← ブロックにすると text-align が効きやすい！ */
+  white-space: pre-wrap; /* ← 改行もきれいに扱える */
+}
+
 /* 📱 画面が狭いときの対応 */
 @media (max-width: 480px) {
 button {
